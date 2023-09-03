@@ -1,0 +1,59 @@
+<toaster-container></toaster-container>
+<section class="content">
+    <div class="box">
+      <div class="box-body">
+        <div class="row">
+
+          <div class="card col-lg-8">
+            <div class="card-header text-left" style="background:#fff;">
+              <strong>Add Job Suggestion</strong>
+            </div>
+
+            <div class="card-block">
+
+          <form [formGroup]="AddJobtypeForm" (ngSubmit)="AddJobtypeFormSubmit()"  novalidate>
+          <div class="col-sm-12">
+                <label>Job Suggestion Name</label><strong>*</strong>
+                <div class="form-group">
+                  <input placeholder="Job Suggestion Name" type="text" name="content" formControlName="content" class="form-control"
+                    required />
+                </div>
+                <div *ngIf="(submitted && AddJobtypeForm.controls.content.invalid) || AddJobtypeForm.controls.content.touched">
+                  <div *ngIf="AddJobtypeForm.hasError('required','content')" class="alert alert-danger">
+                        Job Suggestion Name is required.
+                  </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12">
+              <label>Job Suggestion Type</label><strong>*</strong>
+              <select class="form-control col-sm-3" id="type" formControlName="type">
+                <option value="" selected disabled>Select Suggestion Type</option>
+                <option value="notes">Notes</option>
+                <option value="terms">Terms</option>
+              </select>
+              <div *ngIf="(submitted && AddJobtypeForm.controls.type.invalid)">
+                <div *ngIf="AddJobtypeForm.hasError('required','type')" class="alert alert-danger">
+                    Job Suggestion Type is required.
+                </div>
+              </div>
+
+            </div>
+
+              <div class="col-sm-12 text-center">
+                <button class="btn btn-primary mr-1" type="submit" title="Save" [disabled]="formdisable">
+                  <i class="fa fa-check"> Add</i>
+                </button>
+                <button class="btn btn-warning" type="button" title="Save" [routerLink]="['/jobsuggestionmgmt']">
+                  <i class="fa fa-remove"> Cancel</i>
+                </button>
+              </div>
+
+          </form>
+        </div>
+          </div>
+          <div class="col-lg-3"></div>
+        </div>
+      </div>
+    </div>
+  </section>

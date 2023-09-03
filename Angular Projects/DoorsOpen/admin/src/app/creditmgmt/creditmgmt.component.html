@@ -1,0 +1,59 @@
+<div class="animated fadeIn">
+    <!-- <div class="form-group ">
+        <label for="user_type">Please Select Type </label>
+        <select class="form-control col-sm-3" id="user_type" (change)="userTypeChange($event)">
+          <option value="">All</option>
+          <option value="0">Users</option>
+          <option value="1">Agents</option>
+        </select>
+      </div> -->
+        <div class="card">
+          <div class="card-header"><strong class="credit-mgmt-title"> Credit Management</strong> 
+            <button class="btn btn-success pull-right credit-mgmt-btn" [routerLink]="['/creditmgmt/credit-setting']">
+              <i class="fa fa-plus"> Credit Settings</i>
+          </button>
+          </div>
+      
+          <div class="card-block">
+            <div class="row">       
+              <div class="col-lg-12">
+            <table style="width: 100vw" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+              <thead>
+                <tr>
+                  <th style="width: 5%">No.</th>
+                  <th style="width: 15%">Agent Name</th>
+                  <th style="width: 15%">Free Credit</th>
+                  <th style="width: 15%">Premium Credit</th>
+                  <th style="width: 10%">Total Credit</th>
+                  <th style="width: 15%">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of credits; index as i">
+                  <td>{{ item.user_id }}</td>
+                  <td>{{ item.first_name }} {{ item.last_name }}</td>
+                  <td>{{ item.free_credit }}</td>
+                  <td>{{ item.premium_credit }}</td>
+                  <td>{{ item.free_credit  +  item.premium_credit }}</td>
+                  <td>
+                    <button class="btn btn-primary mr-1" [routerLink]="['/jobsmgmt/jobDetails', item.job_id]" title="View" disabled>
+                      <i class="fa fa-eye"> View</i>
+                    </button> 
+                   <button *ngIf="item.status == '0'" class="btn btn-success" (click)="userActiveOrInactive(item.user_id, '1')" title="Active" style="width:82px;">
+                      <i class="fa fa-unlock"> Active</i>
+                    </button>
+                    <button *ngIf="item.status == '1'" class="btn btn-warning" (click)="userActiveOrInactive(item.user_id, '0')" title="In Active">
+                      <i class="fa fa-lock"> InActive</i>
+                    </button>
+                  </td>
+                </tr>
+                <!-- <tr *ngIf="users?.length == 0">
+                  <td colspan="3" class="no-data-available">No data!</td>
+                </tr> -->
+              </tbody>
+            </table>
+          </div>
+          </div>
+        </div>
+      </div>
+      </div>

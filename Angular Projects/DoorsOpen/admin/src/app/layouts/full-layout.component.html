@@ -1,0 +1,142 @@
+<header class="app-header navbar">
+  <button class="navbar-toggler mobile-sidebar-toggler hidden-lg-up" type="button">&#9776;</button>
+  <a class="navbar-brand" [routerLink]="['/usersmgmt']"></a>
+
+  <ul class="nav navbar-nav hidden-md-down b-r-1">
+    <li class="nav-item">
+      <a class="nav-link navbar-toggler sidebar-toggler" href="#">&#9776;</a>
+    </li>
+  </ul>
+  <ul class="nav navbar-nav ml-auto">
+    <li class="nav-item dropdown" dropdown placement="bottom">
+      <a class="nav-link nav-pill avatar dropdown-toggle" dropdownToggle role="button" aria-controls="dropdown-basic">
+        <img src="assets/img/app-icon-round.png" class="img-avatar">
+      </a>
+      <div *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="simple-dropdown"
+        style="position:absolute;">
+        <div class="divider"></div>
+    <li role="menuitem"><a class="dropdown-item" [routerLink]="['/changepassword']">
+        <i class="fa fa-key"></i> Change Password</a></li>
+    <li role="menuitem"><a class="dropdown-item" (click)="doLogout()" [routerLink]="['/login']">
+        <i class="fa fa-lock"></i> Logout</a></li>
+    </div>
+    </li>
+  </ul>
+</header>
+
+<div class="app-body">
+  <div class="sidebar">
+    <nav class="sidebar-nav">
+      <ul class="nav">
+        <li class="nav-title text-center">
+          <span> Main Navigation </span>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/dashboard']"><i class="fa fa-dashboard"></i> Dashboard </a>
+        </li> -->
+
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/usersmgmt']">
+            <i class="fa fa-user"></i> User Management
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/jobsmgmt']">
+            <i class="fa fa-briefcase"></i> Jobs Management
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/addjobtypemgmt']">
+            <i class="fa fa-briefcase"></i>Job Category Management
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/addbrokeragemgmt']">
+            <i class="fa fa-user"></i>Brokerage Type Management
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/paymentmgmt']">
+            <i class="fa fa-credit-card"></i> Payment Management
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/creditmgmt']">
+            <i class="fa fa-cc-mastercard "></i> Credit Management
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/creditplan']">
+            <i class="fa fa-cc-mastercard "></i> Credit Plan Management
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/impression']">
+            <i class="fa fa-briefcase"></i> Advertisement Management
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/vendormgmt']">
+            <i class="fa fa-industry"></i> Vendor Management
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/teammgmt']">
+            <i class="fa fa-group"></i> Team Management
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/pushnotimgmt']">
+            <i class="fa fa-bell"></i> Push Notification Management
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/jobsuggestionmgmt']">
+            <i class="fa fa-lightbulb-o"></i> Job Suggestion
+          </a>
+        </li>
+
+        <!-- <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/useradd']">
+            <i class="fa fa-user"></i> Add User
+          </a>
+        </li> -->
+
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Main content -->
+  <main class="main">
+
+    <!-- Breadcrumb -->
+    <ol class="breadcrumb mb-0">
+      <breadcrumbs></breadcrumbs>
+    </ol>
+
+    <div class="container-fluid">
+      <toaster-container [toasterconfig]="toasterconfig"></toaster-container>
+      <router-outlet></router-outlet>
+    </div>
+    <!-- /.conainer-fluid -->
+  </main>
+
+</div>
+
+<footer class="app-footer">
+  <span style="color: #20a8d8;">Doorsopen</span> &copy; {{date | date:'yyyy'}}
+  <!-- <span class="float-right">
+    Powered by <a href="https://genesisui.com">MissionMarketplace</a>
+  </span> -->
+</footer>

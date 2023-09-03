@@ -1,0 +1,53 @@
+<div class="animated fadeIn">
+
+    <div class="card">
+        <div class="card-header"><strong class="usr-mgmt-title"> Team Management</strong>
+        </div>
+        <div class="card-block">
+            <div class="row">
+                <div class="col-lg-12">
+                    <table style="width: 100%" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                        class="row-border hover">
+                        <thead>
+                            <tr>
+                                <th>Team ID</th>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Creator Name</th>
+                                <td>Total Members</td>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of teams; index as i">
+                                <td>{{ item.team_id }}</td>
+                                <td>
+                                    <img src="{{item?.image}}" (error)="errorHandler($event)" class="rounded-circle"
+                                        height='50px' width='50px'>
+                                </td>
+                                <td>{{ item.team_name }}</td>
+                                <td>{{item.creator_id.first_name}} {{item.creator_id.last_name}}</td>
+                                <td>{{item.total_members}}</td>
+                                <td>
+                                    <button class="btn btn-primary"
+                                        [routerLink]="['/teammgmt/view-team-member', item.team_id]" title="View Team Members">
+                                        <i class="fa fa-eye"> View</i>
+                                    </button>
+                                    <!-- <button class="btn btn-danger" (click)="deleteTeam(item.user_id)" title="Delete">
+                                        <i class="fa fa-eye"> Delete</i>
+                                    </button> -->
+                                </td>
+                            </tr>
+                            <tr *ngIf="teams?.length == 0">
+                                <td colspan="6" class="no-data-available">No Data Available !</td>
+                            </tr>
+                            <!-- <tr *ngIf="teams?.length == 0">
+                                <td colspan="5" >No teams added yet!</td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+<toaster-container></toaster-container>
+<section class="content">
+    <div class="box">
+      <div class="box-body">
+        <div class="row">
+          
+          <div class="card col-lg-8">
+            <div class="card-header text-left" style="background:#fff;">
+              <strong>Add Job Category</strong>
+            </div>
+  
+            <div class="card-block">
+            
+          <form [formGroup]="AddJobtypeForm" (ngSubmit)="AddJobtypeFormSubmit()"  novalidate>
+          <div class="col-sm-12">
+                <label>Job Category Name</label><strong>*</strong>
+                <div class="form-group">
+                  <input placeholder="Job Category Name" type="text" name="category_name" formControlName="category_name" class="form-control"
+                    required />
+                </div>
+                <div *ngIf="(submitted && AddJobtypeForm.controls.category_name.invalid) || AddJobtypeForm.controls.category_name.touched">
+                  <div *ngIf="AddJobtypeForm.hasError('required','category_name')" class="alert alert-danger">
+                        Job Category Name is required.
+                  </div>
+                </div>
+            </div>
+          
+            <div class="col-sm-12">
+              <label>Color Code</label><strong>*</strong>
+              <div class="form-group">
+                <input class="form-control"
+                       placeholder="Color Code" 
+                       [(colorPicker)]="color" 
+                       [cpOutputFormat]="hex" 
+                       [style.background]="color" 
+                       formControlName="event_color"
+                       (colorPickerChange)="colorPickerChange($event)"
+                       required/>
+                <!-- <input placeholder="Color Code" type="text" name="licensed_realtors" formControlName="licensed_realtors" class="form-control"
+                  required /> -->
+              </div>
+              <div *ngIf="(submitted && AddJobtypeForm.controls.event_color.invalid)">
+                <div *ngIf="AddJobtypeForm.hasError('required','event_color')" class="alert alert-danger">
+                    Color Code is required.
+                </div>
+              </div>
+              
+            </div>   
+             
+              <div class="col-sm-12 text-center">
+                <button class="btn btn-primary mr-1" type="submit" title="Save" [disabled]="formdisable">
+                  <i class="fa fa-check"> Add</i>
+                </button>
+                <button class="btn btn-warning" type="button" title="Save" [routerLink]="['/addjobtypemgmt']">
+                  <i class="fa fa-remove"> Cancel</i>
+                </button>
+              </div>
+            
+          </form>
+        </div>
+          </div>
+          <div class="col-lg-3"></div>
+        </div>
+      </div>
+    </div>
+  </section>

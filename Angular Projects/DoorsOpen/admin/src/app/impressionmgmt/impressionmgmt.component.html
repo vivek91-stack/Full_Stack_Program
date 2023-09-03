@@ -1,0 +1,52 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header"><strong class="usr-mgmt-title"> Advertisement Management</strong>
+      <button class="btn btn-success pull-right usr-mgmt-btn" [routerLink]="['/impression/add-impression']">Add Advertisement Data</button>
+    </div>
+    <div class="card-block">
+      <div class="row">
+        <div class="col-lg-12">
+          <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+            <thead>
+              <tr>
+                <th style="width: 1%;">Ad ID</th>
+                <th style="width: 4%;">Ad Image</th>
+                <th style="width: 5%;">Ad Link</th>
+                <th style="width: 5%;">Ad Start Date</th>
+                <th style="width: 5%;">Ad End Date</th>
+                <th style="width: 1%;">Impressions</th>
+                <th style="width: 1%;">Clicks</th>
+                <th style="width: 4%;">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of banners; index as i">
+                <td>{{ item.id }}</td>
+                <td>
+                  <img src="{{bannerimgUrl}}{{item?.banner_image}}" (error)="errorHandler($event)" class="rounded-circle"
+                    height='50px' width='50px'>
+                </td>
+                <td><a href="{{item.url}}" target="_blank">{{ item.url }}</a></td>
+                <td>{{ item.created_at | date: 'MM-dd-yyyy HH:mm a' }}</td>
+                <td>{{ ( item.updated_date == '0000-00-00 00:00:00' ? '-' : (item.updated_date | date: 'MM-dd-yyyy HH:mm a') )}}</td>
+                <td><span class="badge badge-info">{{ (item.impression_count ? item.impression_count : 0) }}</span></td>
+                <td>
+                  <button class="badge badge-info btn" *ngIf="item.click_count" (click)="viewUserList(item)">{{ item.click_count}}</button>
+                  <button class="badge badge-info btn" *ngIf="!item.click_count">0</button>
+                </td>
+                <td>
+                  <button class="btn btn-primary mr-1" (click)="editAd(item)" title="Edit Advertisement"><i class="fa fa-pencil"></i></button> 
+                  <button *ngIf="item.status == 0" class="btn btn-success" (click)="activeAd(item)" title="Active Advertisement"><i class="fa fa-unlock"></i></button>
+                  <button class="badge badge-success btn" *ngIf="item.status == 1">Active</button>
+                </td>
+              </tr>
+              <tr *ngIf="banners?.length == 0">
+                <td colspan="8" class="no-data-available">No data found!</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

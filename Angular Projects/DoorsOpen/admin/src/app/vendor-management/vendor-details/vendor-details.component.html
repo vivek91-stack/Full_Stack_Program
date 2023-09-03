@@ -1,0 +1,142 @@
+<section class="content">
+  <div class="box">
+    <div class="box-body">
+      <div class="row">
+
+        <div class="card col-lg-8">
+
+          <div class="card-header text-left" style="background:#fff;">
+            <strong>Vendor Details</strong>
+          </div>
+          <div class="card-block">
+            <form [formGroup]="viewDetailsForm" (ngSubmit)="viewDetailsFormSubmit()" novalidate>
+              <label>Vendor Image</label>
+              <div class="form-group">
+                <img src="{{vendor_image}}" alt="Profile Picture" name="profile_image" height="100px" width="100px"
+                  class="image-radius" (error)="errorHandler($event)" />
+              </div>
+
+              <div class="form-group">
+                <div *ngIf="action == 'edit'">
+                  <input type="file" class="form-control" name="image" (change)="handleFileInput($event)" />
+                </div>
+              </div>
+              <!-- <div *ngIf="(submitted && viewDetailsForm.controls.image.invalid) || viewDetailsForm.controls.image.touched">
+                  <div *ngIf="viewDetailsForm.hasError('required','image')" class="alert alert-danger">
+                      Profile Image is required.
+                  </div>
+                </div> -->
+              <div class="alert alert-danger" *ngIf="imageUploadExtentionError == true">
+                Please upload JPG, PNG or JPEG file.
+              </div>
+
+              <label>Vendor Name</label><strong *ngIf="action == 'edit'">*</strong>
+              <div class="form-group">
+                <input *ngIf="action == 'view'" placeholder="Vendor name" type="text" name="name" formControlName="name"
+                  readonly="true" class="form-control" />
+                <input *ngIf="action == 'edit'" placeholder="Vendor name" type="text" name="name" formControlName="name"
+                  class="form-control" />
+
+              </div>
+              <div
+                *ngIf="(submitted && viewDetailsForm.controls.name.invalid) || viewDetailsForm.controls.name.touched">
+                <div *ngIf="viewDetailsForm.hasError('required','name')" class="alert alert-danger">
+                  Vendor name is required.
+                </div>
+                <div
+                  *ngIf="!viewDetailsForm.hasError('required','name') && viewDetailsForm.hasError('minlength','name')"
+                  class="alert alert-danger">
+                  Vendor name should contain at least 3 characters.
+                </div>
+                <!-- <div
+                  *ngIf="!viewDetailsForm.hasError('required','name') && (!viewDetailsForm.hasError('minlength','name')) && (viewDetailsForm.hasError('pattern','name'))"
+                  class="alert alert-danger">
+                  Only space not allowed.
+                </div> -->
+              </div>
+
+
+              <label>Phone Number</label><strong *ngIf="action == 'edit'">*</strong>
+              <div class="form-group">
+                <input *ngIf="action == 'view'" placeholder="Vendor PhoneNumber" type="text" name="phoneNumber"
+                  formControlName="phoneNumber" readonly="true" class="form-control" />
+                <input *ngIf="action == 'edit'" placeholder="Vendor PhoneNumber" type="text" name="phoneNumber"
+                  formControlName="phoneNumber" class="form-control" />
+
+              </div>
+              <div
+                *ngIf="(submitted && viewDetailsForm.controls.phoneNumber.invalid) || viewDetailsForm.controls.phoneNumber.touched">
+                <div *ngIf="viewDetailsForm.hasError('required','phoneNumber')" class="alert alert-danger">
+                  Phone Number is required.
+                </div>
+              </div>
+
+              <label>Address</label><strong *ngIf="action == 'edit'">*</strong>
+              <div class="form-group">
+                <input *ngIf="action == 'view'" readonly="true" ngx-google-places-autocomplete
+                  (onAddressChange)="fromAddressChange($event)" formControlName="address" class="form-control"
+                  id="resource-name" type="text" name="resource-name" placeholder="Enter Place Address">
+
+                <input *ngIf="action == 'edit'" ngx-google-places-autocomplete
+                  (onAddressChange)="fromAddressChange($event)" formControlName="address" class="form-control"
+                  id="resource-name" type="text" name="resource-name" placeholder="Enter Place Address">
+              </div>
+              <div
+                *ngIf="(submitted && viewDetailsForm.controls.address.invalid) || viewDetailsForm.controls.address.touched">
+                <div *ngIf="viewDetailsForm.hasError('required','address')" class="alert alert-danger">
+                  Address is required.
+                </div>
+              </div>
+
+              <label>Information</label><strong>*</strong>
+                <div class="form-group">
+                    <ckeditor  *ngIf="action == 'edit'" formControlName="info" [readonly]="false" debounce="500"></ckeditor>
+                    <ckeditor  *ngIf="action == 'view'"  formControlName="info" [readonly]="true" debounce="500"></ckeditor>
+
+                </div>
+                <div *ngIf="(submitted && viewDetailsForm.controls.info.invalid) || viewDetailsForm.controls.info.touched">
+                  <div *ngIf="viewDetailsForm.hasError('required','info')" class="alert alert-danger">
+                    Information is required.
+                  </div>
+                  <div *ngIf="viewDetailsForm.hasError('required','address')" class="alert alert-danger">
+                    Please enter valid information.
+                  </div>
+                </div>
+
+                <label>Website</label><strong>*</strong>
+                <div class="form-group">
+                  <input  *ngIf="action == 'view'"  readonly="true" placeholder="Website" type="text" name="website" formControlName="website" class="form-control" />
+
+                  <input *ngIf="action == 'edit'" placeholder="Website" type="text" name="website" formControlName="website" class="form-control" />
+
+                </div>
+                <div *ngIf="(submitted && viewDetailsForm.controls.website.invalid) || viewDetailsForm.controls.website.touched">
+                  <div *ngIf="viewDetailsForm.hasError('required','website')" class="alert alert-danger">
+                    Website is required.
+                  </div>
+                  <div *ngIf="!viewDetailsForm.hasError('required','website') && (viewDetailsForm.hasError('pattern','website'))" class="alert alert-danger">
+                    Please enter valid Website.
+                  </div>
+                </div>
+
+              <div class="col-sm-12 text-center">
+                <button *ngIf="action == 'view'" class="btn btn-primary mr-1" (click)="editVendor(userDetails?.user_id)"
+                  title="Back">
+                  <i class="fa fa-edit"> Edit</i>
+                </button>
+                <button *ngIf="action == 'edit'" class="btn btn-primary mr-1" type="submit">
+                  <i class="fa fa-edit"> Submit</i>
+                </button>
+                <button class="btn btn-warning" [routerLink]="['/vendormgmt']" title="Back">
+                  <i class="fa fa-remove"> Cancel</i>
+                </button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+        <div class="col-lg-3"></div>
+      </div>
+    </div>
+  </div>
+</section>

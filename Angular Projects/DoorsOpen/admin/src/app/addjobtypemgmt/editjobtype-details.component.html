@@ -1,0 +1,97 @@
+<!-- <toaster-container></toaster-container> -->
+<section class="content">
+        <div class="box">
+          <div class="box-body">
+            <div class="row">
+              
+              <div class="card col-lg-8">
+                <div class="card-header text-left" style="background:#fff;">
+                  <strong *ngIf="actions=='view'">View Job Category</strong>
+                  <strong *ngIf="actions=='edit'">Edit Job Category</strong>
+                </div>
+      
+                <div class="card-block">
+                
+              <form [formGroup]="editJobtypeForm" (ngSubmit)="editJobtypeFormSubmit()"  novalidate>
+              <div class="col-sm-12">
+                    <label>Job Category Name</label><strong *ngIf="actions=='edit'">*</strong>
+                    <div class="form-group">
+                      <input *ngIf="actions == 'view'" placeholder="Job Category Name" type="text" name="category_name" formControlName="category_name" class="form-control" readonly="true"
+                        required />
+
+                      <input *ngIf="actions == 'edit'" placeholder="Job Category Name" type="text" name="category_name" formControlName="category_name" class="form-control"
+                        required />
+                    </div>
+                    <div *ngIf="(submitted && editJobtypeForm.controls.category_name.invalid) || editJobtypeForm.controls.category_name.touched">
+                      <div *ngIf="editJobtypeForm.hasError('required','category_name')" class="alert alert-danger">
+                            Job Category Name is required.
+                      </div>
+                    </div>
+                </div>
+              
+                <!-- <div class="col-sm-12">
+                      <label>Category status</label>
+                      <div class="form-group">
+                        <input placeholder="Phone" type="text" name="phone" formControlName="phone" class="form-control"
+                          required />
+                      </div>
+                      <div *ngIf="(submitted && editJobtypeForm.controls.phone.invalid) || editJobtypeForm.controls.phone.touched">
+                        <div *ngIf="editJobtypeForm.hasError('required','phone')" class="alert alert-danger">
+                            Category status is required.
+                        </div>
+                      </div>
+                </div> -->
+                <div class="col-sm-12">
+                  <label>Color Code</label><strong *ngIf="actions=='edit'">*</strong>
+                  
+                  <div class="form-group">
+                    <input *ngIf="actions == 'view'" class="form-control"
+                           placeholder="Color Code" 
+                          [style.background]="getJobCategoryDetails?.event_color" 
+                          formControlName="event_color"
+                          />
+                    <input *ngIf="actions=='edit'" class="form-control"
+                           placeholder="Color Code" 
+                           [(colorPicker)]="color" 
+                           [cpOutputFormat]="hex" 
+                           [cpPresetLabel] =getJobCategoryDetails?.event_color 
+                           [style.background]="color" 
+                           formControlName="event_color"
+                           (colorPickerChange)="colorPickerChange($event)"
+                           required
+                           />
+                    <!-- <input placeholder="Color Code" type="text" name="licensed_realtors" formControlName="licensed_realtors" class="form-control"
+                      required /> -->
+                  </div>
+                  <div *ngIf="(submitted && editJobtypeForm.controls.event_color.invalid) || editJobtypeForm.controls.event_color.touched">
+                    <div *ngIf="editJobtypeForm.hasError('required','event_color')" class="alert alert-danger">
+                        Color Code is required.
+                    </div>
+                  </div>
+                  
+                </div>   
+                 
+                  <div class="col-sm-12 text-center">
+                    <button *ngIf="actions == 'view'" class="btn btn-primary mr-1" type="button" title="Edit" [disabled]="formdisable" (click)="editJobEvent($event, getJobCategoryDetails?.job_category_id)">
+                      <i class="fa fa-edit"> Edit</i>
+                    </button>
+                    <!-- <button *ngIf="actions == 'view'" class="btn btn-info" type="button" title="Back" [routerLink]="['/addjobtypemgmt']" [disabled]="formdisable">
+                      <i class="fa fa-backward"> Back</i>
+                    </button> -->
+                    <button *ngIf="actions == 'edit'" class="btn btn-primary mr-1" type="submit" title="Save" [disabled]="formdisable">
+                      <i class="fa fa-check"> Save</i>
+                    </button>
+                    <button class="btn btn-warning" type="button" title="Cancel" [routerLink]="['/addjobtypemgmt']" [disabled]="formdisable">
+                      <i class="fa fa-remove"> Cancel</i>
+                    </button>
+                  </div>
+                
+              </form>
+            </div>
+              </div>
+              <div class="col-lg-3"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    
